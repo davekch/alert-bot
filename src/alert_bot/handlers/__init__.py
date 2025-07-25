@@ -66,8 +66,13 @@ def register_plugins():
 
 
 def create_handlers(config: Config):
-    # create handlers for every entry that is listed as a default handler or has an entry in the handlers section
-    create = set(config.tool.handlers + list(config.handlers.keys()))
+    # create handlers for every entry that is listed as a default handler, has
+    # an entry in the handlers section or is in the registry
+    create = set(
+        config.tool.handlers
+        + list(config.handlers.keys())
+        + list(HANDLER_CLASSES.keys())
+    )
     for instance_name in create:
         # check if this name has a config
         if instance_name in config.handlers:
