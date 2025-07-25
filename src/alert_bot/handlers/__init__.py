@@ -50,7 +50,14 @@ class LogHandler(AlertHandler):
 try:
     from alert_bot.handlers.telegram import TelegramHandler
     register_handler("telegram")(TelegramHandler)
-except ImportError as e:
+except ImportError:
+    pass
+
+
+try:
+    from alert_bot.handlers.notify import NotificationHandler
+    register_handler("notify")(NotificationHandler)
+except ImportError:
     pass
 
 

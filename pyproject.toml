@@ -17,6 +17,9 @@ telegram-start = "alert_bot.handlers.telegram:main"
 telegram = [
     "python-telegram-bot>=22.3",
 ]
+notify = [
+    "notify-send>=1.1.2",
+]
 
 [build-system]
 requires = ["hatchling"]

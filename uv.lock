@@ -10,12 +10,16 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+notify = [
+    { name = "notify-send" },
+]
 telegram = [
     { name = "python-telegram-bot" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "notify-send", marker = "extra == 'notify'", specifier = ">=1.1.2" },
     { name = "python-telegram-bot", marker = "extra == 'telegram'", specifier = ">=22.3" },
     { name = "toml", specifier = ">=0.10.2" },
 ]
@@ -103,6 +107,48 @@ wheels = [
 ]
 
 [[package]]
+name = "notify-send"
+version = "1.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pycairo", marker = "sys_platform == 'linux'" },
+    { name = "pygobject", marker = "sys_platform == 'linux'" },
+    { name = "pypiwin32", marker = "sys_platform == 'win32'" },
+    { name = "pywin32", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/99/49/47b77a20d71cff881fbf5777f19cd49e45ff2b785036093062b0fecd2d8a/notify-send-1.1.2.tar.gz", hash = "sha256:b8fdd96e9cf2f7f3f7fa64ffb5c55500910a74f577db697f16ff342bf87c6882", size = 5216 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/48/4a/922335c4f015784e9e605e047d267d2e19a4ee898ec6eceb5afe122f675d/notify_send-1.1.2-py3-none-any.whl", hash = "sha256:d9a1fccdebdaea2a87f23bdba48918d3ec5e69a720ef592c5d6576f7984e0c7c", size = 6288 },
+]
+
+[[package]]
+name = "pycairo"
+version = "1.28.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/40/d9/412da520de9052b7e80bfc810ec10f5cb3dbfa4aa3e23c2820dc61cdb3d0/pycairo-1.28.0.tar.gz", hash = "sha256:26ec5c6126781eb167089a123919f87baa2740da2cca9098be8b3a6b91cc5fbc", size = 662477 }
+
+[[package]]
+name = "pygobject"
+version = "3.52.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pycairo" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/36/fec530a313d3d48f12e112ac0a65ee3ccc87f385123a0493715609e8e99c/pygobject-3.52.3.tar.gz", hash = "sha256:00e427d291e957462a8fad659a9f9c8be776ff82a8b76bdf402f1eaeec086d82", size = 1235825 }
+
+[[package]]
+name = "pypiwin32"
+version = "223"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pywin32" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/13/e8/4f38eb30c4dae36634a53c5b2cd73b517ea3607e10d00f61f2494449cec0/pypiwin32-223.tar.gz", hash = "sha256:71be40c1fbd28594214ecaecb58e7aa8b708eabfa0125c8a109ebd51edbd776a", size = 622 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/1b/2f292bbd742e369a100c91faa0483172cd91a1a422a6692055ac920946c5/pypiwin32-223-py3-none-any.whl", hash = "sha256:67adf399debc1d5d14dffc1ab5acacb800da569754fafdc576b2a039485aa775", size = 1674 },
+]
+
+[[package]]
 name = "python-telegram-bot"
 version = "22.3"
 source = { registry = "https://pypi.org/simple" }
@@ -112,6 +158,17 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/db/fc/0196e0d7ad247011a560788db204e0a28d76ab75b3d7c7131878f8fb5a06/python_telegram_bot-22.3.tar.gz", hash = "sha256:513d5ab9db96dcf25272dad0a726555e80edf60d09246a7d0d425b77115f5440", size = 1464513 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e5/54/0955bd46a1e046169500e129c7883664b6675d580074d68823485e4d5de1/python_telegram_bot-22.3-py3-none-any.whl", hash = "sha256:88fab2d1652dbfd5379552e8b904d86173c524fdb9270d3a8685f599ffe0299f", size = 717115 },
+]
+
+[[package]]
+name = "pywin32"
+version = "302"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/aa/de/df415649e1caf8cbd703ac65696230d38fc2cbf6fdbe597d84c57c82d323/pywin32-302-cp310-cp310-win32.whl", hash = "sha256:251b7a9367355ccd1a4cd69cd8dd24bd57b29ad83edb2957cfa30f7ed9941efa", size = 8414034 },
+    { url = "https://files.pythonhosted.org/packages/69/c7/4928e67c9ce73348c2ac121df55811a718d7185d748a9a376695b2c39d7e/pywin32-302-cp310-cp310-win_amd64.whl", hash = "sha256:79cf7e6ddaaf1cd47a9e50cc74b5d770801a9db6594464137b1b86aa91edafcc", size = 9182661 },
+    { url = "https://files.pythonhosted.org/packages/fd/98/1c57a1e0f0f2a7204189f18f9fd4ce46e87e4c8996968dae58febc4cea92/pywin32-302-cp39-cp39-win32.whl", hash = "sha256:2393c1a40dc4497fd6161b76801b8acd727c5610167762b7c3e9fd058ef4a6ab", size = 8475719 },
+    { url = "https://files.pythonhosted.org/packages/0a/db/6772985c99b5770875b677163de3be6f83b91b8791fddfc6f251f6bf5ce4/pywin32-302-cp39-cp39-win_amd64.whl", hash = "sha256:af5aea18167a31efcacc9f98a2ca932c6b6a6d91ebe31f007509e293dea12580", size = 9261516 },
 ]
 
 [[package]]
