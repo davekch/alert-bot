@@ -1,0 +1,23 @@
+[project]
+name = "alert-bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "toml>=0.10.2",
+]
+
+[project.scripts]
+alert-bot = "alert_bot.writer:main"
+alert-bot-daemon = "alert_bot.sender:main"
+telegram-start = "alert_bot.handlers.telegram:main"
+
+[project.optional-dependencies]
+telegram = [
+    "python-telegram-bot>=22.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
