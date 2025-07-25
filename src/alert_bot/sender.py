@@ -51,7 +51,8 @@ def send_to_handlers(data: dict, default_handlers: list):
 def setup() -> Config:
     config = load_config()
     config.setup_logging()
-    register_plugins()
+    if config.tool.allow_plugins:
+        register_plugins()
     create_handlers(config)
     make_fifo(config)
     return config

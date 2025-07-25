@@ -12,6 +12,7 @@ class ToolConfig:
     logging_level: str = "INFO"
     logging_format: str = "[%(levelname)-8s] %(name)-16s: %(message)s"
     pid_file: Path = Path("/tmp/alert-bot-daemon.pid")
+    allow_plugins: bool = False
 
     def as_dict(self) -> dict:
         d = asdict(self)
