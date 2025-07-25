@@ -5,6 +5,7 @@ import os
 import sys
 
 from alert_bot import load_config, make_fifo
+from alert_bot.sender import is_daemon_ready
 
 
 def get_args():
@@ -19,6 +20,11 @@ def get_args():
 def main() -> None:
     args = get_args()
     config = load_config()
+
+    if not is_daemon_ready(config.tool.pid_file):
+        print("ERROR: daemon does not seem to be running")
+        return
+
     fifo_path = make_fifo(config)
 
     # check if invoked with pipe

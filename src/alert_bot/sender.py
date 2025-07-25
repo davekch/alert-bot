@@ -22,6 +22,18 @@ def open_pid_file(path: Path):
         path.unlink()
 
 
+def is_daemon_ready(pid_file: Path) -> bool:
+    try:
+        pid = int(pid_file.read_text())
+    except Exception:
+        return False
+    try:
+        os.kill(pid, 0)  # check if process exists
+        return True
+    except ProcessLookupError:
+        return False
+
+
 def send_to_handlers(data: dict, default_handlers: list):
     record = Record(subject=data["subject"], body=data["body"], timestamp=datetime.fromisoformat(data["timestamp"]))
     # get additional handlers to send this to
