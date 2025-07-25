@@ -67,7 +67,7 @@ def register_plugins():
         name = plugin.name
         cls = plugin.load()
         if not issubclass(cls, AlertHandler):
-            print(f"cannot register handler {name}: is not an AlertHandler")
+            logger.error(f"cannot register handler {name}: is not an AlertHandler")
             continue
         HANDLER_CLASSES[name] = cls
 
@@ -90,7 +90,7 @@ def create_handlers(config: Config):
         # get the class to construct this handler
         handler_class = get_handler_class(handler_config.type)
         if not handler_class:
-            print(f"failed to construct handler {instance_name}: no such handler: {handler_config.type}")
+            logger.error(f"failed to construct handler {instance_name}: no such handler: {handler_config.type}")
             continue
         try:
             handler = handler_class(**handler_config.config)
