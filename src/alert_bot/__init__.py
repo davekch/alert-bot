@@ -11,10 +11,12 @@ class ToolConfig:
     handlers: list[str] = field(default_factory=lambda: ["logger"])
     logging_level: str = "INFO"
     logging_format: str = "[%(levelname)-8s] %(name)-16s: %(message)s"
+    pid_file: Path = Path("/tmp/alert-bot-daemon.pid")
 
     def as_dict(self) -> dict:
         d = asdict(self)
         d["fifo_path"] = str(self.fifo_path)
+        d["pid_file"] = str(self.pid_file)
         return d
 
     @classmethod
@@ -25,6 +27,7 @@ class ToolConfig:
             handlers=data.get("handlers", default.handlers),
             logging_level=data.get("logging_level", default.logging_level),
             logging_format=data.get("logging_format", default.logging_format),
+            pid_file=data.get("pid_file", default.pid_file),
         )
 
 
