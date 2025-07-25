@@ -10,8 +10,8 @@ from alert_bot.sender import is_daemon_ready
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--subject")
-    parser.add_argument("-b", "--body")
+    parser.add_argument("-s", "--subject", default="")
+    parser.add_argument("-b", "--body", default="")
     parser.add_argument("--handlers", nargs="*", default=[])
     return parser.parse_args()
 
