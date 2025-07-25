@@ -80,5 +80,9 @@ def create_handlers(config: Config):
         if not handler_class:
             print(f"failed to construct handler {instance_name}: no such handler: {handler_config.type}")
             continue
-        handler = handler_class(**handler_config.config)
-        HANDLER_INSTANCES[instance_name] = handler
+        try:
+            handler = handler_class(**handler_config.config)
+            logger.info(f"handler {instance_name} ready")
+            HANDLER_INSTANCES[instance_name] = handler
+        except TypeError as e:
+            logger.error(f"could not load handler {instance_name}: misconfigured")

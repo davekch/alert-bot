@@ -12,7 +12,6 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--subject")
     parser.add_argument("-b", "--body")
-    parser.add_argument("-t", "--to")
     parser.add_argument("--handlers", nargs="*", default=[])
     return parser.parse_args()
 
