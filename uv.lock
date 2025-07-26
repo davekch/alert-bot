@@ -1,9 +1,9 @@
 version = 1
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 [[package]]
 name = "alert-bot"
-version = "0.1.0"
+version = "0.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "toml" },
@@ -167,8 +167,6 @@ source = { registry = "https://pypi.org/simple" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/aa/de/df415649e1caf8cbd703ac65696230d38fc2cbf6fdbe597d84c57c82d323/pywin32-302-cp310-cp310-win32.whl", hash = "sha256:251b7a9367355ccd1a4cd69cd8dd24bd57b29ad83edb2957cfa30f7ed9941efa", size = 8414034 },
     { url = "https://files.pythonhosted.org/packages/69/c7/4928e67c9ce73348c2ac121df55811a718d7185d748a9a376695b2c39d7e/pywin32-302-cp310-cp310-win_amd64.whl", hash = "sha256:79cf7e6ddaaf1cd47a9e50cc74b5d770801a9db6594464137b1b86aa91edafcc", size = 9182661 },
-    { url = "https://files.pythonhosted.org/packages/fd/98/1c57a1e0f0f2a7204189f18f9fd4ce46e87e4c8996968dae58febc4cea92/pywin32-302-cp39-cp39-win32.whl", hash = "sha256:2393c1a40dc4497fd6161b76801b8acd727c5610167762b7c3e9fd058ef4a6ab", size = 8475719 },
-    { url = "https://files.pythonhosted.org/packages/0a/db/6772985c99b5770875b677163de3be6f83b91b8791fddfc6f251f6bf5ce4/pywin32-302-cp39-cp39-win_amd64.whl", hash = "sha256:af5aea18167a31efcacc9f98a2ca932c6b6a6d91ebe31f007509e293dea12580", size = 9261516 },
 ]
 
 [[package]]
