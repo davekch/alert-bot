@@ -49,8 +49,8 @@ def send_to_handlers(data: dict, default_handlers: list):
             logger.error(f"handler {handler_name} not found; drop message {record}")
 
 
-def setup(loglevel: str=None) -> Config:
-    config = load_config()
+def setup(config_path: str, loglevel: str=None) -> Config:
+    config = load_config(config_path)
     if loglevel:
         config.tool.logging_level = loglevel
     config.setup_logging()
@@ -64,12 +64,13 @@ def setup(loglevel: str=None) -> Config:
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--debug", action="store_true")
+    parser.add_argument("-c", "--config", metavar="path", help="path to config file")
     return parser.parse_args()
 
 
 def main():
     args = get_args()
-    config = setup("DEBUG" if args.debug else None)
+    config = setup(args.config, "DEBUG" if args.debug else None)
     fifo_path = config.tool.fifo_path
     default_handlers = config.tool.handlers
     

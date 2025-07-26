@@ -84,8 +84,11 @@ def get_config_path():
     return config_dir / "config.toml"
 
 
-def load_config() -> Config:
-    path = get_config_path()
+def load_config(path: str | Path=None) -> Config:
+    if not path:
+        path = get_config_path()
+    else:
+        path = Path(path)
     config = Config()
     if not path.exists():
         write_config(config)

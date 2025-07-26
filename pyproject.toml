@@ -1,6 +1,6 @@
 [project]
 name = "alert-bot"
-version = "0.1.1"
+version = "0.1.2"
 description = "pipe output of terminal commands to any destination."
 readme = "README.md"
 requires-python = ">=3.10"

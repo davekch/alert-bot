@@ -15,12 +15,13 @@ def get_args():
     parser.add_argument("-b", "--body", default="")
     parser.add_argument("--handlers", nargs="*", default=[])
     parser.add_argument("-f", "--filter", metavar="regex")
+    parser.add_argument("-c", "--config", metavar="path", help="path to config file")
     return parser.parse_args()
 
 
 def main() -> None:
     args = get_args()
-    config = load_config()
+    config = load_config(args.config)
 
     if not is_daemon_ready(config.tool.pid_file):
         print("ERROR: daemon does not seem to be running")
