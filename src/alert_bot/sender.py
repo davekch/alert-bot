@@ -1,3 +1,4 @@
+import argparse
 import json
 from contextlib import contextmanager
 from datetime import datetime
@@ -48,8 +49,10 @@ def send_to_handlers(data: dict, default_handlers: list):
             logger.error(f"handler {handler_name} not found; drop message {record}")
 
 
-def setup() -> Config:
+def setup(loglevel: str=None) -> Config:
     config = load_config()
+    if loglevel:
+        config.tool.logging_level = loglevel
     config.setup_logging()
     if config.tool.allow_plugins:
         register_plugins()
@@ -58,8 +61,15 @@ def setup() -> Config:
     return config
 
 
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-d", "--debug", action="store_true")
+    return parser.parse_args()
+
+
 def main():
-    config = setup()
+    args = get_args()
+    config = setup("DEBUG" if args.debug else None)
     fifo_path = config.tool.fifo_path
     default_handlers = config.tool.handlers
     
