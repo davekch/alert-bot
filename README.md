@@ -8,7 +8,7 @@ long_command && echo finished | alert-bot --handler notify
 
 get an email if a command produces an error:
 ```bash
-some_command | grep ERROR | alert-bot --handler email --subject "some_command produced an error"
+some_command | grep --line-buffered ERROR | alert-bot --handler email --subject "some_command produced an error"
 ```
 
 or send it via telegram:
