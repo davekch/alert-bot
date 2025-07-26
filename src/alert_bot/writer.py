@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 import os
 import sys
+import re
 
 from alert_bot import load_config, make_fifo
 from alert_bot.sender import is_daemon_ready
@@ -13,6 +14,7 @@ def get_args():
     parser.add_argument("-s", "--subject", default="")
     parser.add_argument("-b", "--body", default="")
     parser.add_argument("--handlers", nargs="*", default=[])
+    parser.add_argument("-f", "--filter", metavar="regex")
     return parser.parse_args()
 
 
@@ -45,6 +47,8 @@ def main() -> None:
     }
     with fifo_path.open("w") as fifo:
         for line in input:
+            if args.filter and not re.match(args.filter, line):
+                continue
             fifo.write(
                 json.dumps(
                     common_message | {
