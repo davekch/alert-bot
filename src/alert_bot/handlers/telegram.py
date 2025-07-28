@@ -22,12 +22,12 @@ class TelegramHandler(AlertHandler):
 
     def handle(self, message: Record):
         text = (
-            f"message from {message.timestamp.isoformat()}:\n"
             f"*subject*: {message.subject}\n"
             f"*body*:\n"
             "```\n"
             f"{message.body}\n"
-            "```"
+            "```\n"
+            f"*time*: {message.timestamp.isoformat()}"
         )
         logger.debug(f"send message to telegram: {text}")
         asyncio.run(self.send_message(text))
