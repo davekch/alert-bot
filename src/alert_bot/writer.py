@@ -32,8 +32,8 @@ def main() -> None:
     # check if invoked with pipe
     has_stdin = not os.isatty(sys.stdin.fileno())
     if has_stdin and args.body:
-        print("ERROR: can only receive input from one source: either --body or pipe")
-        return
+        print("WARNING: detected two input types, --body and pipe, --body takes precedence")
+        input = args.body.splitlines()
     elif not has_stdin and not args.body:
         print("ERROR: must receive at least one input: either --body or pipe")
         return
