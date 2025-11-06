@@ -57,7 +57,6 @@ def setup(config_path: str, loglevel: str=None) -> Config:
     if config.tool.allow_plugins:
         register_plugins()
     create_handlers(config)
-    make_fifo(config)
     return config
 
 
@@ -71,12 +70,11 @@ def get_args():
 def main():
     args = get_args()
     config = setup(args.config, "DEBUG" if args.debug else None)
-    fifo_path = config.tool.fifo_path
     default_handlers = config.tool.handlers
-    
+
     with open_pid_file(config.tool.pid_file):
-        while True:
-            with fifo_path.open() as fifo:
+        with make_fifo(config) as fifo:
+            while True:
                 for line in fifo:  # blocks
                     logger.debug(f"got line from fifo: {line}")
                     data = json.loads(line)

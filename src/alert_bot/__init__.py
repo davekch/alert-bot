@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from dataclasses import dataclass, field, asdict
 import logging
 from pathlib import Path
@@ -28,7 +29,7 @@ class ToolConfig:
             handlers=data.get("handlers", default.handlers),
             logging_level=data.get("logging_level", default.logging_level),
             logging_format=data.get("logging_format", default.logging_format),
-            pid_file=data.get("pid_file", default.pid_file),
+            pid_file=Path(data.get("pid_file", default.pid_file)),
         )
 
 
@@ -107,8 +108,16 @@ def write_config(config: Config):
         toml.dump(config_data, f)
 
 
-def make_fifo(config: Config) -> Path:
+@contextmanager
+def make_fifo(config: Config):
+    """
+    context manager to create and open a fifo for reading, deletes after closing
+    """
     fifo_path = config.tool.fifo_path
     if not fifo_path.exists():
         os.mkfifo(fifo_path)
-    return fifo_path
+    try:
+        with fifo_path.open() as fifo:
+            yield fifo
+    finally:
+        fifo_path.unlink()

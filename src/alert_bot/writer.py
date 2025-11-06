@@ -27,8 +27,6 @@ def main() -> None:
         print("ERROR: daemon does not seem to be running")
         return
 
-    fifo_path = make_fifo(config)
-
     # check if invoked with pipe
     has_stdin = not os.isatty(sys.stdin.fileno())
     if has_stdin and args.body:
@@ -46,7 +44,7 @@ def main() -> None:
         "subject": args.subject,
         "handlers": args.handlers,
     }
-    with fifo_path.open("w") as fifo:
+    with config.tool.fifo_path.open("w") as fifo:
         for line in input:
             if args.filter and not re.match(args.filter, line):
                 continue
