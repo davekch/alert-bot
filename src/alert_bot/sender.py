@@ -72,9 +72,9 @@ def main():
     config = setup(args.config, "DEBUG" if args.debug else None)
     default_handlers = config.tool.handlers
 
-    with open_pid_file(config.tool.pid_file):
-        with make_fifo(config) as fifo:
-            while True:
+    with open_pid_file(config.tool.pid_file), make_fifo(config) as fifo_path:
+        while True:
+            with fifo_path.open() as fifo:
                 for line in fifo:  # blocks
                     logger.debug(f"got line from fifo: {line}")
                     data = json.loads(line)

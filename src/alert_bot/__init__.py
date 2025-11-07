@@ -111,13 +111,12 @@ def write_config(config: Config):
 @contextmanager
 def make_fifo(config: Config):
     """
-    context manager to create and open a fifo for reading, deletes after closing
+    context manager to create a fifo for reading, deletes after closing
     """
     fifo_path = config.tool.fifo_path
     if not fifo_path.exists():
         os.mkfifo(fifo_path)
     try:
-        with fifo_path.open() as fifo:
-            yield fifo
+        yield fifo_path
     finally:
         fifo_path.unlink()
